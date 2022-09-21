@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+img {
+    width: 500px;
+    height: 600;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 500;
+
+    letter-spacing: 5px;
+}
+
+h2 {
+    font-size: 20px;
+
+    margin-top: 10px;
+}
+
+input {
+    width: 500px;
+    height: 40px;
+
+    font-size: 20px;
+
+    margin: 0 30px;
+}
+
+.conteudo {
+    width: 60%;
+    height: 900px;
+
+    margin: 20px auto;
+}
+
+.conteudo-jogo {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-jogo {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    margin-top: 50px;
+}
+
+.botao-escolher-palvra {
+    width: 200px;
+    height: 50px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    background-color: #43AE60;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.interface-jogo {
+    margin-top: 40px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.teclado {
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tecla {
+    width: 70px;
+    height: 70px;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    background-color: #E1EDF4;
+    color: #39729E;
+
+    border: 1px solid #39729E;
+    border-radius: 5px;
+
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.chute {
+    margin-top: 50px;
+
+    display: flex;
+}
+
+.botao-chutar {
+    width: 100px;
+    height: 40px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    background-color: #E1EDF4;
+    color: #39729E;
+
+    border: 1px solid #39729E;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
