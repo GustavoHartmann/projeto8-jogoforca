@@ -5,21 +5,23 @@ import palavras from "../palavras"
 export default function App() {
     const [jogoIniciado, setJogoIniciado] = React.useState(false);
     const [numeroErros, setNumeroErros] = React.useState(0);
+    const numeroMaxErros = 6;
     const [palavraSorteada, setPalavraSorteada] = React.useState("");
     const [arrayPalavra, setArrayPalavra] = React.useState([]);
-    const [arrayAlfabeto, setArrayAlfabeto] = React.useState(alfabeto);
+    const [arrayBooleano, setArrayBooleano] = React.useState(alfabeto);
+    const [corPalavra, setCorPalavra] = React.useState("");
+    const [valorInput, setValorInput] = React.useState("");
+
 
     function Tecla(props) {
         return (
             <button className="tecla" disabled={props.booleano} onClick={clicarTecla}>{props.letra.toUpperCase()}</button>
         )
-
     }
 
     function comecarJogo() {
-        document.querySelector(".palavra-escolhida").classList.remove("errado")
-        document.querySelector(".palavra-escolhida").classList.remove("certo")
-        setNumeroErros(0)
+        setCorPalavra("");
+        setNumeroErros(0);
         setJogoIniciado(true);
         alfabeto.map((obj) => obj.booleano = false)
         sortearPalavra();
@@ -27,7 +29,7 @@ export default function App() {
 
     function sortearPalavra() {
         const numeroAleatorio = Math.floor(Math.random() * palavras.length)
-        setPalavraSorteada(palavras[numeroAleatorio])
+        setPalavraSorteada(palavras[numeroAleatorio]);
         console.log(palavras[numeroAleatorio]);
         setArrayPalavra(Array(palavras[numeroAleatorio].length).fill("_"))
     }
@@ -35,7 +37,7 @@ export default function App() {
     function clicarTecla(evento) {
         const tecla = evento.target.innerText.toLowerCase();
         palavraSorteada.includes(tecla) ? reenderizarLetra(tecla) : aumentarErros()
-        setArrayAlfabeto(alfabeto.map((obj) => obj.letra === evento.target.innerText.toLowerCase() || obj.booleano === true ? obj.booleano = true : obj.booleano = false))
+        setArrayBooleano(alfabeto.map((obj) => obj.letra === evento.target.innerText.toLowerCase() || obj.booleano === true ? obj.booleano = true : obj.booleano = false))
     }
 
     function reenderizarLetra(tecla) {
@@ -48,26 +50,31 @@ export default function App() {
 
     function ganharJogo() {
         resetarEstados();
-        document.querySelector(".palavra-escolhida").classList.add("certo")
+        setCorPalavra("verde");
     }
 
     function aumentarErros() {
         const qtdErros = numeroErros + 1
-        setNumeroErros(qtdErros)
-        if (qtdErros === 6) {
-            finalizarJogo();
+        setNumeroErros(qtdErros);
+        if (qtdErros === numeroMaxErros) {
+            perderJogo();
         }
     }
 
-    function finalizarJogo() {
-        resetarEstados()
-        document.querySelector(".palavra-escolhida").classList.add("errado")
+    function perderJogo() {
+        resetarEstados();
+        setCorPalavra("vermelho");
     }
 
     function resetarEstados() {
-        setArrayPalavra(palavraSorteada)
+        setArrayPalavra(palavraSorteada);
         alfabeto.map((obj) => obj.booleano = true)
         setJogoIniciado(false);
+    }
+
+    function chutarPalavra() {
+        valorInput === palavraSorteada ? ganharJogo() : perderJogo()
+        setValorInput("");
     }
 
     return (
@@ -77,7 +84,7 @@ export default function App() {
                 <div className="info-jogo">
                     <button className="botao-escolher-palvra" onClick={comecarJogo}>Escolher palavra</button>
                     <div className="palavra-escolhida">
-                        <h1>{arrayPalavra}</h1>
+                        <h1 className={corPalavra}>{arrayPalavra}</h1>
                     </div>
                 </div>
             </div>
@@ -87,8 +94,8 @@ export default function App() {
                 </div>
                 <div className="chute">
                     <h2>Já sei a palavra!</h2>
-                    <input type="text" disabled={!jogoIniciado} />
-                    <button className="botao-chutar">Chutar</button>
+                    <input type="text" disabled={!jogoIniciado} value={valorInput} onChange={(e) => setValorInput(e.target.value)}/>
+                    <button className="botao-chutar" disabled={!jogoIniciado} onClick={chutarPalavra}>Chutar</button>
                 </div>
             </div>
         </div>

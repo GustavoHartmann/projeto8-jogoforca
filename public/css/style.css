@@ -144,10 +144,10 @@ input {
     cursor: pointer;
 }
 
-.errado {
+.vermelho {
     color: red;
 }
 
-.certo {
+.verde {
     color: #43AE60;
 }
