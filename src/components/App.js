@@ -15,7 +15,7 @@ export default function App() {
 
     function Tecla(props) {
         return (
-            <button className="tecla" disabled={props.booleano} onClick={clicarTecla}>{props.letra.toUpperCase()}</button>
+            <button data-identifier="letter" className="tecla" disabled={props.booleano} onClick={clicarTecla}>{props.letra.toUpperCase()}</button>
         )
     }
 
@@ -73,6 +73,7 @@ export default function App() {
     }
 
     function chutarPalavra() {
+        setNumeroErros(numeroMaxErros);
         valorInput === palavraSorteada ? ganharJogo() : perderJogo()
         setValorInput("");
     }
@@ -80,11 +81,11 @@ export default function App() {
     return (
         <div className="conteudo">
             <div className="conteudo-jogo">
-                <img src={`./assets/img/forca${numeroErros}.png`} alt="imagem da forca" />
+                <img data-identifier="game-image" src={`./assets/img/forca${numeroErros}.png`} alt="imagem da forca" />
                 <div className="info-jogo">
-                    <button className="botao-escolher-palvra" onClick={comecarJogo}>Escolher palavra</button>
+                    <button data-identifier="choose-word" className="botao-escolher-palvra" onClick={comecarJogo}>Escolher palavra</button>
                     <div className="palavra-escolhida">
-                        <h1 className={corPalavra}>{arrayPalavra}</h1>
+                        <h1 data-identifier="word" className={corPalavra}>{arrayPalavra}</h1>
                     </div>
                 </div>
             </div>
@@ -94,8 +95,8 @@ export default function App() {
                 </div>
                 <div className="chute">
                     <h2>Já sei a palavra!</h2>
-                    <input type="text" disabled={!jogoIniciado} value={valorInput} onChange={(e) => setValorInput(e.target.value)}/>
-                    <button className="botao-chutar" disabled={!jogoIniciado} onClick={chutarPalavra}>Chutar</button>
+                    <input data-identifier="type-guess" type="text" disabled={!jogoIniciado} value={valorInput} onChange={(e) => setValorInput(e.target.value)}/>
+                    <button data-identifier="guess-button" className="botao-chutar" disabled={!jogoIniciado} onClick={chutarPalavra}>Chutar</button>
                 </div>
             </div>
         </div>
