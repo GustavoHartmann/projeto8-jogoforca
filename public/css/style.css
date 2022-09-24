@@ -32,6 +32,8 @@ input {
 
     font-size: 20px;
 
+    border-radius: 5px;
+
     margin: 0 30px;
 }
 
@@ -84,6 +86,25 @@ input {
     align-items: center;
 }
 
+.interface-jogo button {
+    font-weight: bold;
+
+    background-color: #E1EDF4;
+    color: #39729E;
+
+    border: 1px solid #39729E;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.interface-jogo button:disabled {
+    background-color: #9FAAB5;
+    color: #90979B;
+
+    border: none;
+}
+
 .teclado {
     width: 100%;
 
@@ -97,21 +118,8 @@ input {
     height: 70px;
 
     font-size: 30px;
-    font-weight: bold;
-
-    background-color: #E1EDF4;
-    color: #39729E;
-
-    border: 1px solid #39729E;
-    border-radius: 5px;
 
     margin: 5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
 }
 
 .chute {
@@ -134,4 +142,12 @@ input {
     border-radius: 5px;
 
     cursor: pointer;
+}
+
+.errado {
+    color: red;
+}
+
+.certo {
+    color: #43AE60;
 }
