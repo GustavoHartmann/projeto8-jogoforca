@@ -7,11 +7,12 @@ export default function App() {
     const [numeroErros, setNumeroErros] = React.useState(0);
     const numeroMaxErros = 6;
     const [palavraSorteada, setPalavraSorteada] = React.useState("");
+    const [palavraSorteadaSemAcento, setPalavraSorteadaSemAcento] = React.useState("");
+    const [arrayPalavraSorteadaSemAcento, setArrayPalavraSorteadaSemAcento] = React.useState([]);
     const [arrayPalavra, setArrayPalavra] = React.useState([]);
     const [arrayBooleano, setArrayBooleano] = React.useState(alfabeto);
     const [corPalavra, setCorPalavra] = React.useState("");
     const [valorInput, setValorInput] = React.useState("");
-
 
     function Tecla(props) {
         return (
@@ -30,19 +31,21 @@ export default function App() {
     function sortearPalavra() {
         const numeroAleatorio = Math.floor(Math.random() * palavras.length)
         setPalavraSorteada(palavras[numeroAleatorio]);
+        setPalavraSorteadaSemAcento(palavras[numeroAleatorio].normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
+        setArrayPalavraSorteadaSemAcento(palavras[numeroAleatorio].normalize("NFD").replace(/[\u0300-\u036f]/g, "").split(""))
         console.log(palavras[numeroAleatorio]);
         setArrayPalavra(Array(palavras[numeroAleatorio].length).fill("_"))
     }
 
     function clicarTecla(evento) {
         const tecla = evento.target.innerText.toLowerCase();
-        palavraSorteada.includes(tecla) ? reenderizarLetra(tecla) : aumentarErros()
+        palavraSorteadaSemAcento.includes(tecla) ? reenderizarLetra(tecla) : aumentarErros()
         setArrayBooleano(alfabeto.map((obj) => obj.letra === evento.target.innerText.toLowerCase() || obj.booleano === true ? obj.booleano = true : obj.booleano = false))
     }
 
     function reenderizarLetra(tecla) {
         const arrayPalavraSorteada = palavraSorteada.split("")
-        arrayPalavraSorteada.map((l, indexLetra) => l === tecla ? arrayPalavra.splice(indexLetra, 1, l) : console.log("batata"))
+        arrayPalavraSorteada.map((l, indexLetra) => arrayPalavraSorteadaSemAcento[indexLetra] === tecla ? arrayPalavra.splice(indexLetra, 1, l) : console.log("batata"))
         if (!arrayPalavra.includes("_")) {
             ganharJogo();
         }
